@@ -33,6 +33,19 @@ header .part:last-child{
 #hamburger {
     width:50px;
 }
+.close{
+    display: none;
+}
+.open{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-violet);
+    color: white;
+    border-radius: 7px;
+}
+#menu-mobile span {
+    margin: 10px;
+}
 #slogan {
     display: flex;
     flex-direction: column;
