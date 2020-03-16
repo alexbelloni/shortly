@@ -1,0 +1,295 @@
+:root {
+    --primary: hsl(180, 66%, 49%);
+    --dark-violet: hsl(257, 27%, 26%);
+    --red: hsl(0, 87%, 67%);
+    --gray: rgba(240, 240, 240, 0.938);
+    --grayish-violet: hsl(240, 20%, 99%);
+    --very-dark-blue: hsl(255, 11%, 22%);
+    --very-dark-violet: hsl(260, 8%, 14%);
+}
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--very-dark-blue);
+}
+header {
+    display: flex;
+}
+#menu-desktop {
+    display: none;
+}
+header .part {
+    width: 50%;
+}
+header .part:last-child{
+    text-align: right;
+}
+#logo {
+    padding-top: 15px;
+}
+#hamburger {
+    width:50px;
+}
+#slogan {
+    display: flex;
+    flex-direction: column;
+}
+#slogan img {
+    width: 300px;
+} 
+#slogan div {
+    text-align: center;
+}
+#slogan div:first-child {
+    font-weight: bold;
+    font-size: 26px;
+    color: var(--very-dark-violet);
+}
+#text p {
+    margin:0;
+}
+button {
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 0; 
+}
+.btn-rounded {
+    width: 200px;
+    border-radius: 20px;
+    font-size: 20px;   
+}
+#slogan button {
+    margin: 20px 0;
+}
+#action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 15px;
+    padding: 20px;
+    background-color: var(--dark-violet);
+    background-image: url("../images/bg-boost-mobile.svg");
+    border-radius: 7px;
+}
+#action input {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: inherit;
+    border-radius: 7px;
+    flex: 2;
+}
+#action button {
+    flex:1;
+    height: 47px;
+}
+.btn-regular {
+    border-radius: 7px;
+    font-size: 20px;   
+}
+#statistics{
+    background-color: var(--gray);
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+    top: -80px;
+    z-index: -1;
+    margin-bottom: -80px;
+}
+#statistics .title{    
+    font-weight: bold;
+    margin-top:0;
+    
+}
+#statistics .separator {
+    padding-top: 20px;
+}
+#statistics .connector{
+    width: 10px;
+    height: 60px;
+    margin-bottom: -20px;
+    background-color: var(--primary);
+    position: relative;
+    left: calc(50% - 5px);
+    top: -20px;
+    z-index: -1;
+}
+#statistics .panel{    
+    background-color: white;
+    margin: 15px;
+    border-radius: 7px;
+    padding-bottom: 20px;
+    
+}
+#statistics .circle{    
+    background-color: var(--dark-violet);
+    border-radius: 50%;
+    width:70px;
+    height:70px;
+    position: relative;
+    left: calc(50% - 35px);
+    top:-20px;
+}
+#statistics .circle img{    
+    padding: 10px;
+}
+#statistics .text{    
+    padding: 0 20px;
+}
+#boost {
+    text-align: center;
+    font-weight: bold;
+    font-size: 26px;
+    color: white;
+    background-color: var(--dark-violet);
+    padding: 30px 0;
+    background-image: url("../images/bg-boost-mobile.svg")
+}
+footer {
+    background-color: var(--very-dark-blue);
+    color: var(--gray);
+    text-align: center;
+    padding: 25px 0;
+}
+footer #logo {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+
+}
+#footer-menu {
+    display: flex;
+    flex-direction: column;
+}
+footer .options {
+    display: flex;
+    flex-direction: column;
+}
+footer .title {
+    font-weight: bold;
+    color: white;
+    padding-top: 20px;
+}
+#social {
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+#social img {
+    padding: 0 10px;    
+}
+
+.attribution { font-size: 11px; text-align: center; }
+.attribution a { color: hsl(228, 45%, 44%); }
+
+@media screen and (min-width: 375px) {
+
+}
+@media screen and (min-width: 1278px) {
+    header {
+        margin: 15px;
+        align-items: center;
+    }
+    header .part {
+        width: 100%;
+    }
+    #menu-desktop {
+        display: flex;
+    }
+    header .part:first-child {
+        flex: 1;
+    }
+    header .part {
+        flex: 4;
+    }
+    header .part:last-child {
+        display: none;
+    }
+
+    #menu-desktop #main{
+        flex: 2;
+        display: flex;
+        flex-direction: row;
+    }
+    header #menu-desktop #main span{
+        margin: 0 10px;
+    }
+    #menu-desktop #login{
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+    }
+    header #menu-desktop #login span{
+        margin: 0 10px;
+    }
+    #login .btn-rounded {
+        width: 100px;
+        border-radius: 20px;
+        font-size: 18px;
+        padding: 0;   
+    }
+    #slogan {
+        flex-direction: row-reverse;
+    }
+    #slogan {
+        margin: 15px;
+    }
+    #slogan .part {
+        width:50%;
+    }
+    #slogan div:first-child {
+        font-weight: bold;
+        font-size: 40px;
+        color: var(--very-dark-violet);
+    }
+    #text div{
+        text-align: left;
+        font-size: 26px;;
+    }
+    #slogan img {
+        width: 450px;
+    } 
+    #action button {
+        margin: 0 10px;
+    }
+    #statistics {
+        display: flex;
+        flex-direction: column;
+    }
+    #statistics #header {
+        align-self: center;
+        width: 50%;
+    }
+    #statistics-circles{
+        display: flex;
+    }
+    .separator, .connector {
+        display:none;
+    }
+    #boost {
+        background-image: url("../images/bg-boost-desktop.svg");
+    }
+    #footer-menu {
+        flex-direction: row;
+    }
+    footer #logo {
+        padding-top: 0;
+    }
+    #footer-menu .options {
+        flex:1;
+    }
+    footer .title {
+        padding-top: 0;
+        align-items: normal;
+    }
+    #social {
+        padding-top: 0;
+        align-self: baseline;
+    }
+
+}
