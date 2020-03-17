@@ -103,6 +103,36 @@ button {
     border-radius: 7px;
     font-size: 20px;   
 }
+#links {
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+    background-color: var(--gray);
+}
+.link {
+    display:flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 2px;
+    padding: 5px;
+}
+.link span {
+    flex: 1;
+}
+.link span:first-child {
+    flex: 3;
+}
+.link span:nth-child(2) {
+    color: var(--primary);
+}
+.link button {
+    flex: 1;
+    border-radius: 7px;
+}
+.copied{
+    background-color: var(--dark-violet);
+}
+
 #statistics{
     background-color: var(--gray);
     text-align: center;
@@ -269,6 +299,9 @@ footer .title {
     } 
     #action button {
         margin: 0 10px;
+    }
+    .link {
+        flex-direction: row;
     }
     #statistics {
         display: flex;
