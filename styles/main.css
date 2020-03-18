@@ -58,7 +58,7 @@ header .part:last-child{
 }
 #slogan div:first-child {
     font-weight: bold;
-    font-size: 26px;
+    font-size: 35px;
     color: var(--very-dark-violet);
 }
 #text p {
@@ -145,6 +145,7 @@ button {
 #statistics .title{    
     font-weight: bold;
     margin-top:0;
+    font-size: 26px;
     
 }
 #statistics .separator {
@@ -230,16 +231,13 @@ footer .title {
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
 
-@media screen and (min-width: 375px) {
-
-}
 @media screen and (min-width: 1278px) {
+    body {
+        margin: 0 100px;
+    }
     header {
         margin: 15px;
         align-items: center;
-    }
-    header .part {
-        width: 100%;
     }
     #menu-desktop {
         display: flex;
@@ -253,21 +251,19 @@ footer .title {
     header .part:last-child {
         display: none;
     }
-
     #menu-desktop #main{
         flex: 2;
         display: flex;
         flex-direction: row;
     }
-    header #menu-desktop #main span{
+    header #menu-desktop #main span {
         margin: 0 10px;
     }
     #menu-desktop #login{
-        flex: 1;
         display: flex;
         flex-direction: row;
     }
-    header #menu-desktop #login span{
+    header #menu-desktop #login span {
         margin: 0 10px;
     }
     #login .btn-rounded {
@@ -287,7 +283,7 @@ footer .title {
     }
     #slogan div:first-child {
         font-weight: bold;
-        font-size: 40px;
+        font-size: 50px;
         color: var(--very-dark-violet);
     }
     #text div{
@@ -295,7 +291,7 @@ footer .title {
         font-size: 26px;;
     }
     #slogan img {
-        width: 450px;
+        width: 500px;
     } 
     #action button {
         margin: 0 10px;
@@ -337,5 +333,9 @@ footer .title {
         padding-top: 0;
         align-self: baseline;
     }
-
+}
+@media screen and (min-width: 1420px) {
+    body {
+        margin: 0 300px;
+    }
 }
