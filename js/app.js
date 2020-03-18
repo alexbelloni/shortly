@@ -7,20 +7,19 @@ window.addEventListener("load", () => {
     });
 
     document.querySelector("#btn-shorten-it").addEventListener("click", e => {
-        function createElement(atype, aclass, atext, anid) {
+        function createElement(atype, aclass, atext) {
             const element = document.createElement(atype);
             element.className = aclass || "";
             element.innerText = atext || "";
-            element.id = anid || "";
             return element;
         }
         function getTrunkedLink(link) {
             return `${link.substr(0, 30)}...`;
         }
-        function createElements(id, shortlyLink) {
+        function createLinkPanel(shortlyLink) {
             const nodeLink = createElement("div", "link");
             nodeLink.appendChild(createElement("span", null, getTrunkedLink(userLink)));
-            nodeLink.appendChild(createElement("span", null, shortlyLink, id));
+            nodeLink.appendChild(createElement("span", null, shortlyLink));
             const nodeButton = createElement("button", null, "Copy");
             nodeButton.addEventListener("click", () => {
                 ClipboardAPIClipboardWrite(shortlyLink);
@@ -33,8 +32,7 @@ window.addEventListener("load", () => {
 
         const userLink = document.querySelector("#user-link").value;
         shortify(userLink, success => {
-            const id = `sh${Math.random().toString().substr(2, 4)}`;
-            createElements(id, success);
+            createLinkPanel(success);
         }, error => alert(error));
     });
 })
@@ -54,23 +52,20 @@ function ClipboardAPIClipboardWrite(value) {
 function shortify(userLink, success, error) {
     if (!userLink) return
 
-    const data = {
-        "long_url": userLink
-    }
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://api-ssl.bitly.com/v4/shorten");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Authorization", `Bearer 0c0f6a3e164e8f1d3da13b09ab9587b9e937ec14`);
-    xhr.addEventListener("readystatechange", function () {
-        const responseJson = JSON.parse(this.responseText);
-        if (responseJson.errors && responseJson.errors.length > 0) {
-            error(responseJson.errors.map(e => `${e.field}: ${e.error_code}`).join(", "));
-        } else {
-            if (this.readyState === 4) {
-                success(responseJson.link);
+    const shortenerModule = (Math.random() < 0.5) ? "Bitly" : "Rebrandly";
 
-            }
-        }
-    });
-    xhr.send(JSON.stringify(data));
+    import("./APISender.js").then(module => {
+        const APISender = module.default();
+        import(`./${shortenerModule}.js`).then(module => {
+            const shortener = module.default;
+            APISender.post(shortener, userLink, e => {
+                if (e.error) {
+                    error(e.error);
+                } else {
+                    success(e.link);
+                }
+            });
+        })
+    })
 }
+
