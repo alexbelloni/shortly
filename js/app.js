@@ -4,10 +4,17 @@ window.addEventListener("load", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "https://yourlinkshortly.netlify.com/.netlify/functions/config");
     xhr.setRequestHeader("content-type", "application/json");
-    xhr.addEventListener("load",e=>console.log(e));
-    xhr.send();
+    xhr.addEventListener("load", config=>{
+        firebaseConfig = {
+            apiKey: config.FIREBASE_APIKEY,
+            authDomain: `${config.FIREBASE_PROJECTID}.firebaseapp.com`,
+            databaseURL: `https://${config.FIREBASE_PROJECTID}.firebaseio.com`,
+            projectId: config.FIREBASE_PROJECTID,
+            storageBucket: `${config.FIREBASE_PROJECTID}.appspot.com`,
+            messagingSenderId: "55734054802",
+            appId: config.FIREBASE_APPID
+        };
 
-    if (firebaseConfig) {
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
@@ -27,8 +34,9 @@ window.addEventListener("load", () => {
                 const FirebaseAuth = module.default;
                 FirebaseAuth.signIn();
             });
-        })
-    }
+        })        
+    });
+    xhr.send();
 
     var _auth;
     function setLoggedUser(auth) {
