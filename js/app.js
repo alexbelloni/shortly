@@ -2,9 +2,10 @@ window.addEventListener("load", () => {
     var firebaseConfig = null;
 
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://yourlinkshortly.netlify.com/.netlify/functions/config");
+    xhr.open("GET", "https://cors-anywhere.herokuapp.com/https://yourlinkshortly.netlify.com/.netlify/functions/config");
     xhr.setRequestHeader("content-type", "application/json");
-    xhr.addEventListener("load", config=>{
+    xhr.addEventListener("load", e=>{
+        const config = JSON.parse(e.target.response)
         firebaseConfig = {
             apiKey: config.FIREBASE_APIKEY,
             authDomain: `${config.FIREBASE_PROJECTID}.firebaseapp.com`,
@@ -14,7 +15,6 @@ window.addEventListener("load", () => {
             messagingSenderId: "55734054802",
             appId: config.FIREBASE_APPID
         };
-
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
@@ -34,14 +34,16 @@ window.addEventListener("load", () => {
                 const FirebaseAuth = module.default;
                 FirebaseAuth.signIn();
             });
-        })        
+        })
     });
     xhr.send();
-
+    
     var _auth;
     function setLoggedUser(auth) {
         _auth = auth;
-        document.querySelector("#login").setAttribute("class", "close")
+        document.querySelector("#login").setAttribute("class", "close");
+        console.log(_auth)
+        document.querySelector("#username").innerHTML = `<span>${_auth.user.displayName}</span>`
     }
 
     document.querySelector("#hamburger").addEventListener("click", e => {
