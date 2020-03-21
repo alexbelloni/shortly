@@ -34,7 +34,7 @@ header .part:last-child{
     width:50px;
 }
 .close{
-    display: none;
+    display: none !important;
 }
 .open{
     display: flex;

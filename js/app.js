@@ -1,4 +1,35 @@
 window.addEventListener("load", () => {
+    var firebaseConfig = null;
+
+    if (firebaseConfig) {
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        //Verify if it has a logged user
+        import("./FirebaseAuth.js").then(module => {
+            const FirebaseAuth = module.default;
+            FirebaseAuth.getRedirectResult(function (result) {
+
+                if (result.credential) {
+                    setLoggedUser({ user: result.user, token: result.credential.accessToken })
+                }
+            });
+        });
+
+        document.querySelector(".btn-signup").addEventListener("click", () => {
+            import("./FirebaseAuth.js").then(module => {
+                const FirebaseAuth = module.default;
+                FirebaseAuth.signIn();
+            });
+        })
+    }
+
+    var _auth;
+    function setLoggedUser(auth) {
+        _auth = auth;
+        document.querySelector("#login").setAttribute("class", "close")
+    }
+
     document.querySelector("#hamburger").addEventListener("click", e => {
         const mobileClasses = document.querySelector("#menu-mobile").getAttribute("class");
         document.querySelector("#menu-mobile").setAttribute("class", mobileClasses === "part close" ? "part open" : "part close");
