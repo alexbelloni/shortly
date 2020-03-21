@@ -1,6 +1,12 @@
 window.addEventListener("load", () => {
     var firebaseConfig = null;
 
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://yourlinkshortly.netlify.com/.netlify/functions/config");
+    xhr.setRequestHeader("content-type", "application/json");
+    xhr.addEventListener("load",e=>console.log(e));
+    xhr.send();
+
     if (firebaseConfig) {
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
