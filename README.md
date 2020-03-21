@@ -4,13 +4,13 @@
   
 Shortly is a friendly web app, which uses URL shorteners to simplify the sharing of links.
 
-[Site](yourlinkshortly.netlify.com)
+[Site](https://yourlinkshortly.netlify.com)
 
 ## Technical Requirements
 
 The requirements of this project are:
 
-✔ A SPA (single page application) that consumes data from at least one API 
+✔ A SPA (single page application) that consumes data from at least one API  
 ✔ Make at least one HTTP request to a third-party server  
 ✔ Use either vanilla JS or jQuery to perform DOM manipulation  
 ✔ Listen for events and add interactivity based on user input  
