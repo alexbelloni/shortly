@@ -2,48 +2,49 @@ window.addEventListener("load", () => {
     var firebaseConfig = null;
 
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://cors-anywhere.herokuapp.com/https://yourlinkshortly.netlify.com/.netlify/functions/config");
+    xhr.open("GET", "https://yourlinkshortly.netlify.com/.netlify/functions/config");
     xhr.setRequestHeader("content-type", "application/json");
-    xhr.addEventListener("load", e=>{
-        const config = JSON.parse(e.target.response)
-        firebaseConfig = {
-            apiKey: config.FIREBASE_APIKEY,
-            authDomain: `${config.FIREBASE_PROJECTID}.firebaseapp.com`,
-            databaseURL: `https://${config.FIREBASE_PROJECTID}.firebaseio.com`,
-            projectId: config.FIREBASE_PROJECTID,
-            storageBucket: `${config.FIREBASE_PROJECTID}.appspot.com`,
-            messagingSenderId: "55734054802",
-            appId: config.FIREBASE_APPID
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        //Verify if it has a logged user
-        import("./FirebaseAuth.js").then(module => {
-            const FirebaseAuth = module.default;
-            FirebaseAuth.getRedirectResult(function (result) {
-
-                if (result.credential) {
-                    setLoggedUser({ user: result.user, token: result.credential.accessToken })
-                }
-            });
-        });
-
-        document.querySelector(".btn-signup").addEventListener("click", () => {
-            import("./FirebaseAuth.js").then(module => {
-                const FirebaseAuth = module.default;
-                FirebaseAuth.signIn();
-            });
-        })
-    });
+    xhr.addEventListener("load", e=>loaded(e.target.response));
     xhr.send();
     
+    function loaded(json){
+            const config = JSON.parse(json)
+            firebaseConfig = {
+                apiKey: config.FIREBASE_APIKEY,
+                authDomain: `${config.FIREBASE_PROJECTID}.firebaseapp.com`,
+                databaseURL: `https://${config.FIREBASE_PROJECTID}.firebaseio.com`,
+                projectId: config.FIREBASE_PROJECTID,
+                storageBucket: `${config.FIREBASE_PROJECTID}.appspot.com`,
+                messagingSenderId: "55734054802",
+                appId: config.FIREBASE_APPID
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+    
+            //Verify if it has a logged user
+            import("./FirebaseAuth.js").then(module => {
+                const FirebaseAuth = module.default;
+                FirebaseAuth.getRedirectResult(function (result) {
+    
+                    if (result.credential) {
+                        setLoggedUser({ user: result.user, token: result.credential.accessToken })
+                    }
+                });
+            });
+    
+            document.querySelectorAll(".btn-signup").forEach(e=>e.addEventListener("click", () => {
+                import("./FirebaseAuth.js").then(module => {
+                    const FirebaseAuth = module.default;
+                    FirebaseAuth.signIn();
+                });
+            }))
+          
+    }
     var _auth;
     function setLoggedUser(auth) {
         _auth = auth;
-        document.querySelector("#login").setAttribute("class", "close");
-        console.log(_auth)
-        document.querySelector("#username").innerHTML = `<span>${_auth.user.displayName}</span>`
+        document.querySelectorAll(".login-area").forEach(e=>e.setAttribute("class", "close"));
+        document.querySelectorAll(".username").forEach(e=>e.innerHTML = `<span>${_auth.user.displayName}</span>`)
     }
 
     document.querySelector("#hamburger").addEventListener("click", e => {

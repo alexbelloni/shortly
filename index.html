@@ -22,35 +22,37 @@
         <span>Pricing</span>
         <span>Resources</span>
       </div>
-      <div id="login">
+      <div id="login" class="login-area">
         <span>Login</span>
         <button class="btn-rounded btn-signup">
           Sign up
-        </button>
-        
-      </div>
-      <div id="username"></div>
-    </nav>
+        </button>        
+      </div>  
+      <div class="username"></div>    
+    </nav>    
     <div class="part">
       <img id="hamburger" src="./images/hamburger.png"></img>
-    </div>
+    </div>    
   </header>
+  
   <section id="slogan">
     <div class="part">
       <img id="working" src="./images/illustration-working.svg"></img>
     </div>
     <div id="menu-mobile" class="part close">
+      <span class="username"></span>
       <span>Features</span>
       <span>Pricing</span>
       <span>Resources</span>
       <span>---</span>
-      <span>Login</span>
-      <div>
-        <button class="btn-rounded btn-signup">
-          Sign up
-        </button>
+      <div class="login-area">
+        <span>Login</span>
+        <div>
+          <button class="btn-rounded btn-signup">
+            Sign up
+          </button>
+        </div>
       </div>
-
     </div>
     <div id="text" class="part">
       <div>
@@ -169,6 +171,7 @@
   <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
 </body>
 
 </html>
