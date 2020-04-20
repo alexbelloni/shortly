@@ -2,15 +2,20 @@ window.addEventListener("load", () => {
     var firebaseConfig = null;
 
     //Signup Process -------------
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://yourlinkshortly.netlify.com/.netlify/functions/config");
-    xhr.setRequestHeader("content-type", "application/json");
-    xhr.addEventListener("load", e => loaded(e.target.response));
-    xhr.addEventListener("error", ()=>{});
-    xhr.send();
+    import("./APISender.js").then(module => {
+        const APISender = module.default();
+        APISender.get("https://yourlinkshortly.netlify.app/.netlify/functions/config", e => {
+            if (e.error) {
+                console.log(e);
+                return
+            }
+            loaded(e.target.response);
+        });
+    });
 
     function loaded(json) {
         const config = JSON.parse(json)
+        //xbellonifromcanada@gmail.com
         firebaseConfig = {
             apiKey: config.FIREBASE_APIKEY,
             authDomain: `${config.FIREBASE_PROJECTID}.firebaseapp.com`,
@@ -29,24 +34,15 @@ window.addEventListener("load", () => {
             FirebaseAuth.getRedirectResult(function (result) {
 
                 if (result.credential) {
-                    setLoggedUser({ user: result.user, token: result.credential.accessToken })
+                    document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "close"));
+                    document.querySelectorAll(".username").forEach(e => e.innerHTML = `<span>${result.user.displayName}</span>`)
                 }
             });
-        });
 
-        document.querySelectorAll(".btn-signup").forEach(e => e.addEventListener("click", () => {
-            import("./FirebaseAuth.js").then(module => {
-                const FirebaseAuth = module.default;
+            document.querySelectorAll(".btn-signup").forEach(e => e.addEventListener("click", () => {
                 FirebaseAuth.signIn();
-            });
-        }))
-
-    }
-    var _auth;
-    function setLoggedUser(auth) {
-        _auth = auth;
-        document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "close"));
-        document.querySelectorAll(".username").forEach(e => e.innerHTML = `<span>${_auth.user.displayName}</span>`)
+            }));
+        });
     }
     //Signup Process -------------end
 
