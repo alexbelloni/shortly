@@ -6,6 +6,7 @@ Shortly is a friendly web app, which uses URL shorteners to simplify the sharing
 
 [Site](https://yourlinkshortly.netlify.com)
 
+Project description: single-page application that consumes data from at least one API and persists user data via Firebase  
 ## Technical Requirements
 
 The requirements of this project are:
