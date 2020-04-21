@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
         const FirebaseAuth = module.default;
         FirebaseAuth.getConfigFirebase(config => {
             configObj = config;
-            console.log("configObj",configObj)
+            
             // Initialize Firebase
             firebase.initializeApp(config.firebase);
 
