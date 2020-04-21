@@ -16,13 +16,13 @@ const FirebaseAuth = () => {
     function _getFirebaseConfigFromNetlify(callback) {
         import("./APISender.js").then(module => {
             const APISender = module.default();
-            APISender.get("https://yourlinkshortly.netlify.app/.netlify/functions/config", e => {
-                if (e.error) {
-                    console.log(e);
+            APISender.get("https://yourlinkshortly.netlify.app/.netlify/functions/config", response => {
+                if (response.error) {
+                    console.log(response);
                     callback();
                 }
-           
-                const json = JSON.parse(e.target.response);
+           console.log("response",response)
+                const json = JSON.parse(response);
                 const firebaseConfig = { firebase: _getConfig(json), shorteners: json };
                 callback(firebaseConfig);
             });
