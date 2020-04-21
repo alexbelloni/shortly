@@ -3,14 +3,14 @@ const ToolRebrandly = () => {
 
     function getRequestHeader() {
         return {
-            "apikey": "954ba592f5554b5c89de844bd75e015e"
+            "apikey": configObj.AUTH_REBRANDLY
         }
     }
 
     function getRequestData(link) {
         return {
-        destination: link,
-        domain: { fullName: "rebrand.ly" }
+            destination: link,
+            domain: { fullName: "rebrand.ly" }
         };
     }
 

@@ -29,7 +29,7 @@ const FirebaseAuth = () => {
 
     function getConfigFirebase(callback) {
         import("./devEnv.js").then(module => {
-            callback(_getConfig(module.default));
+            callback({..._getConfig(module.default), ...module.default});
         }).catch(()=>{
             _getFirebaseConfigFromNetlify(callback);
         })

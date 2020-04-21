@@ -20,11 +20,11 @@ const APISender = () => {
             });
             xhr.send();
     }
-    function post(shortenerTool, link, callback) {
+    function post(configObj, shortenerTool, link, callback) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", shortenerTool.endpoint);
         xhr.setRequestHeader("Content-Type", "application/json");
-        const header = shortenerTool.getRequestHeader();
+        const header = shortenerTool.getRequestHeader(configObj);
         for (var key in header) {
             xhr.setRequestHeader(key, header[key]);
         }
