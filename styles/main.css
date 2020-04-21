@@ -1,6 +1,6 @@
 :root {
-    --primary: hsl(180, 66%, 49%);
-    --dark-violet: hsl(257, 27%, 26%);
+    --primary: hsl(180, 66%, 49%); /*#31cfcf*/
+    --dark-violet: hsl(257, 27%, 26%); /*#3B3054*/
     --red: hsl(0, 87%, 67%);
     --gray: rgba(240, 240, 240, 0.938);
     --grayish-violet: hsl(240, 20%, 99%);
@@ -33,6 +33,11 @@ header .part:last-child{
 #hamburger {
     width:50px;
 }
+.loading img{
+    width: 25px !important;
+    padding-right: 50px;
+}
+
 .close{
     display: none !important;
 }

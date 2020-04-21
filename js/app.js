@@ -5,11 +5,13 @@ window.addEventListener("load", () => {
             // Initialize Firebase
             firebase.initializeApp(config);
 
-            FirebaseAuth.getRedirectResult(function (result) {
+            setLoginStatus(true);
 
+            FirebaseAuth.getRedirectResult(function (result) {
+                setLoginStatus(false);
                 if (result.credential) {
-                    document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "close"));
-                    document.querySelectorAll(".username").forEach(e => e.innerHTML = `<span>${result.user.displayName}</span>`)
+                    setLoginStatus(false, true);
+                    document.querySelectorAll(".username").forEach(e => e.innerHTML = `<span>${result.user.displayName}</span>`);
                 }
             });
 
@@ -20,42 +22,57 @@ window.addEventListener("load", () => {
     });
 
     document.querySelector("#hamburger").addEventListener("click", e => {
-    const mobileClasses = document.querySelector("#menu-mobile").getAttribute("class");
-    document.querySelector("#menu-mobile").setAttribute("class", mobileClasses === "part close" ? "part open" : "part close");
-    const imageClasses = document.querySelector("#working").getAttribute("class");
-    document.querySelector("#working").setAttribute("class", imageClasses === "part close" ? "part" : "part close");
-});
+        const mobileClasses = document.querySelector("#menu-mobile").getAttribute("class");
+        document.querySelector("#menu-mobile").setAttribute("class", mobileClasses === "part close" ? "part open" : "part close");
+        const imageClasses = document.querySelector("#working").getAttribute("class");
+        document.querySelector("#working").setAttribute("class", imageClasses === "part close" ? "part" : "part close");
+    });
 
-document.querySelector("#btn-shorten-it").addEventListener("click", e => {
-    function createElement(atype, aclass, atext) {
-        const element = document.createElement(atype);
-        element.className = aclass || "";
-        element.innerText = atext || "";
-        return element;
-    }
-    function getTrunkedLink(link) {
-        return `${link.substr(0, 30)}...`;
-    }
-    function createLinkPanel(shortlyLink) {
-        const nodeLink = createElement("div", "link");
-        nodeLink.appendChild(createElement("span", null, getTrunkedLink(userLink)));
-        nodeLink.appendChild(createElement("span", null, shortlyLink));
-        const nodeButton = createElement("button", null, "Copy");
-        nodeButton.addEventListener("click", () => {
-            ClipboardAPIClipboardWrite(shortlyLink);
-            nodeButton.innerText = "Copied!"
-            nodeButton.className = "copied";
-        });
-        nodeLink.appendChild(nodeButton);
-        document.querySelector("#links").appendChild(nodeLink);
-    }
+    document.querySelector("#btn-shorten-it").addEventListener("click", e => {
+        function createElement(atype, aclass, atext) {
+            const element = document.createElement(atype);
+            element.className = aclass || "";
+            element.innerText = atext || "";
+            return element;
+        }
+        function getTrunkedLink(link) {
+            return `${link.substr(0, 30)}...`;
+        }
+        function createLinkPanel(shortlyLink) {
+            const nodeLink = createElement("div", "link");
+            nodeLink.appendChild(createElement("span", null, getTrunkedLink(userLink)));
+            nodeLink.appendChild(createElement("span", null, shortlyLink));
+            const nodeButton = createElement("button", null, "Copy");
+            nodeButton.addEventListener("click", () => {
+                ClipboardAPIClipboardWrite(shortlyLink);
+                nodeButton.innerText = "Copied!"
+                nodeButton.className = "copied";
+            });
+            nodeLink.appendChild(nodeButton);
+            document.querySelector("#links").appendChild(nodeLink);
+        }
 
-    const userLink = document.querySelector("#user-link").value;
-    shortify(userLink, success => {
-        createLinkPanel(success);
-    }, error => alert(error));
-});
+        const userLink = document.querySelector("#user-link").value;
+        shortify(userLink, success => {
+            createLinkPanel(success);
+        }, error => alert(error));
+    });
 })
+
+function setLoginStatus(isWaiting, isHidden) {
+    if (isHidden) {
+        document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area close"));
+        document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading close"));
+    } else {
+        if (!isWaiting) {
+            document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area"));
+            document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading close"));
+        } else {
+            document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area close"));
+            document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading"));
+        }
+    }
+}
 
 function ClipboardAPIClipboardWrite(value) {
     if (document.activeElement) {
