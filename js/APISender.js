@@ -8,6 +8,7 @@ const APISender = () => {
                 if(!xhr.status){
                     callback({error: `type: ${xhrEvent.type} status: ${xhrEvent.target.status}`});
                 }
+                console.log("this",this)
                 const response = JSON.parse(this.responseText);
                 if (response.errors && response.errors.length > 0) {
                     callback({error: response.errors.map(e => `${e.field}: ${e.error_code}`).join(", ")});
