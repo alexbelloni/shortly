@@ -21,8 +21,8 @@ const FirebaseAuth = () => {
                     console.log(e);
                     callback();
                 }
-                const config = _getConfig(JSON.parse(e.target.response));
-                const firebaseConfig = { firebase: config, shorteners: config };
+                const json = JSON.parse(e.target.response);
+                const firebaseConfig = { firebase: _getConfig(json), shorteners: json };
                 callback(firebaseConfig);
             });
         });
