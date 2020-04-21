@@ -21,6 +21,7 @@ const FirebaseAuth = () => {
                     console.log(e);
                     callback();
                 }
+                console.log("e.target",e.target)
                 const json = JSON.parse(e.target.response);
                 const firebaseConfig = { firebase: _getConfig(json), shorteners: json };
                 callback(firebaseConfig);
