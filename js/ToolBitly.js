@@ -1,21 +1,20 @@
-const Rebrandly = () => {
-    const endpoint = "https://api.rebrandly.com/v1/links";
+const ToolBitly = () => {
+    const endpoint = "https://api-ssl.bitly.com/v4/shorten";
 
     function getRequestHeader() {
         return {
-            "apikey": "954ba592f5554b5c89de844bd75e015e"
+            "Authorization": "Bearer 0c0f6a3e164e8f1d3da13b09ab9587b9e937ec14"
         }
     }
 
     function getRequestData(link) {
         return {
-        destination: link,
-        domain: { fullName: "rebrand.ly" }
+            "long_url": link
         };
     }
 
     function parseResponse(res) {
-        return { link: res.shortUrl };
+        return { link: res.link.replace("http://","") };
     }
     return {
         endpoint,
@@ -25,4 +24,4 @@ const Rebrandly = () => {
     }
 }
 
-export default Rebrandly();
+export default ToolBitly();
