@@ -5,13 +5,14 @@ window.addEventListener("load", () => {
             // Initialize Firebase
             firebase.initializeApp(config);
 
+            //setLoginStatus(false, true, {name: "John Doe"}); return
+
             setLoginStatus(true);
 
             FirebaseAuth.getRedirectResult(function (result) {
                 setLoginStatus(false);
                 if (result.credential) {
-                    setLoginStatus(false, true);
-                    document.querySelectorAll(".username").forEach(e => e.innerHTML = `<span>${result.user.displayName}</span>`);
+                    setLoginStatus(false, true, {name: result.user.displayName});
                 }
             });
 
@@ -59,11 +60,14 @@ window.addEventListener("load", () => {
     });
 })
 
-function setLoginStatus(isWaiting, isHidden) {
-    if (isHidden) {
+function setLoginStatus(isWaiting, isLogged, user) {
+    if (isLogged) {
         document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area close"));
         document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading close"));
+        document.querySelectorAll(".user").forEach(e => e.setAttribute("class", "user"));
+        document.querySelectorAll(".username").forEach(e => e.innerText = user.name);
     } else {
+        document.querySelectorAll(".user").forEach(e => e.setAttribute("class", "user close"));
         if (!isWaiting) {
             document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area"));
             document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading close"));
