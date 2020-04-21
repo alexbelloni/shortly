@@ -5,9 +5,9 @@ window.addEventListener("load", () => {
         const FirebaseAuth = module.default;
         FirebaseAuth.getConfigFirebase(config => {
             configObj = config;
-            
+
             // Initialize Firebase
-            firebase.initializeApp(config);
+            firebase.initializeApp(config.firebase);
 
             //setLoginStatus(false, true, {name: "John Doe"}); return
 
@@ -104,7 +104,7 @@ function shortify(userLink, success, error) {
         import(`./${shortenerModule}.js`).then(module => {
             const shortener = module.default;
             console.log("configObj",configObj)
-            APISender.post(configObj, shortener, userLink, e => {
+            APISender.post(configObj.shorteners, shortener, userLink, e => {
                 if (e.error) {
                     error(e.error);
                 } else {

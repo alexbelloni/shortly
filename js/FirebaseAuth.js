@@ -12,8 +12,8 @@ const FirebaseAuth = () => {
             appId: jsonObj.FIREBASE_APPID
         }
     }
-    
-    function _getFirebaseConfigFromNetlify(callback){
+
+    function _getFirebaseConfigFromNetlify(callback) {
         import("./APISender.js").then(module => {
             const APISender = module.default();
             APISender.get("https://yourlinkshortly.netlify.app/.netlify/functions/config", e => {
@@ -21,7 +21,8 @@ const FirebaseAuth = () => {
                     console.log(e);
                     callback();
                 }
-                const firebaseConfig = _getConfig(JSON.parse(e.target.response));
+                const config = _getConfig(JSON.parse(e.target.response));
+                const firebaseConfig = { firebase: config, shorteners: config };
                 callback(firebaseConfig);
             });
         });
@@ -29,8 +30,8 @@ const FirebaseAuth = () => {
 
     function getConfigFirebase(callback) {
         import("./devEnv.js").then(module => {
-            callback({..._getConfig(module.default), ...module.default});
-        }).catch(()=>{
+            callback({ firebase: _getConfig(module.default), shorteners: module.default });
+        }).catch(() => {
             _getFirebaseConfigFromNetlify(callback);
         })
     }
