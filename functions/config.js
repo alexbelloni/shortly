@@ -5,7 +5,7 @@ exports.handler = (event, context, callback) => {
     return callback(null, {
         statusCode: 200,
         body: JSON.stringify({
-            FIREBASE_APIKEY, FIREBASE_APPID, FIREBASE_PROJECTID
+            FIREBASE_APIKEY, FIREBASE_APPID, FIREBASE_PROJECTID, AUTH_BITLY, AUTH_REBRANDLY
         })
     })
 }
