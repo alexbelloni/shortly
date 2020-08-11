@@ -1,13 +1,13 @@
 :root {
-    --primary: hsl(180, 66%, 49%);
-    /*#31cfcf*/
-    --dark-violet: hsl(257, 27%, 26%);
-    /*#3B3054*/
-    --red: hsl(0, 87%, 67%);
+    --primary: hsl(257, 27%, 26%);
+    --secondary: hsl(180, 66%, 49%);
+    --light: white;
+    --dark: hsl(260, 8%, 14%);
     --gray: rgba(240, 240, 240, 0.938);
+    /*
+    --red: hsl(0, 87%, 67%);
     --grayish-violet: hsl(240, 20%, 99%);
-    --very-dark-blue: hsl(255, 11%, 22%);
-    --very-dark-violet: hsl(260, 8%, 14%);
+    */
 }
 
 body {
@@ -16,15 +16,11 @@ body {
     box-sizing: border-box;
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
-    color: var(--very-dark-blue);
+    color: var(--dark);
 }
 
 header {
     display: flex;
-}
-
-#menu-desktop {
-    display: none;
 }
 
 header .part {
@@ -39,10 +35,6 @@ header .part:last-child {
     padding-top: 15px;
 }
 
-#hamburger {
-    width: 50px;
-}
-
 .loading img {
     width: 25px !important;
     padding-right: 50px;
@@ -53,6 +45,7 @@ header .part:last-child {
     align-items: center;
     align-self: center;
 }
+
 .username {
     font-size: 16px;
     padding-left: 10px;
@@ -64,59 +57,30 @@ header .part:last-child {
     border-radius: 20px;
 }
 
-.close {
+.element-close {
     display: none !important;
-}
-
-.open {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--dark-violet);
-    color: white;
-    border-radius: 7px;
-}
-
-#menu-mobile span {
-    margin: 10px;
 }
 
 #slogan {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-#slogan img {
+#img-working {
     width: 300px;
 }
 
-#slogan div {
+#slogan .text>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
-#slogan div:first-child {
+.text-bigger {
+    font-size: 26px;
     font-weight: bold;
-    font-size: 35px;
-    color: var(--very-dark-violet);
-}
-
-#text p {
-    margin: 0;
-}
-
-button {
-    background-color: var(--primary);
-    color: white;
-    padding: 10px 0;
-}
-
-.btn-rounded {
-    width: 200px;
-    border-radius: 20px;
-    font-size: 20px;
-}
-
-#slogan button {
-    margin: 20px 0;
 }
 
 #action {
@@ -126,40 +90,29 @@ button {
     text-align: center;
     margin: 15px;
     padding: 20px;
-    background-color: var(--dark-violet);
+    background-color: var(--primary);
     background-image: url("../images/bg-boost-mobile.svg");
     border-radius: 7px;
 }
 
 #action input {
-    margin-bottom: 10px;
     padding: 10px;
     font-size: inherit;
     border-radius: 7px;
     flex: 3;
 }
 
-#action button {
-    flex: 1;
-    height: 47px;
-}
-
-.btn-regular {
-    border-radius: 7px;
-    font-size: 20px;
-}
-
 #links {
     display: flex;
     flex-direction: column;
-    padding: 0 15px;
+    padding: 30px 15px;
     background-color: var(--gray);
 }
 
 .link {
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--light);
     margin: 2px;
     padding: 5px;
 }
@@ -173,16 +126,7 @@ button {
 }
 
 .link span:nth-child(2) {
-    color: var(--primary);
-}
-
-.link button {
-    flex: 1;
-    border-radius: 7px;
-}
-
-.copied {
-    background-color: var(--dark-violet);
+    color: var(--secondary);
 }
 
 #statistics {
@@ -209,7 +153,7 @@ button {
     width: 10px;
     height: 60px;
     margin-bottom: -20px;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     position: relative;
     left: calc(50% - 5px);
     top: -20px;
@@ -217,14 +161,14 @@ button {
 }
 
 #statistics .panel {
-    background-color: white;
+    background-color: var(--light);
     margin: 15px;
     border-radius: 7px;
     padding-bottom: 20px;
 }
 
 #statistics .circle {
-    background-color: var(--dark-violet);
+    background-color: var(--primary);
     border-radius: 50%;
     width: 70px;
     height: 70px;
@@ -242,24 +186,26 @@ button {
 }
 
 #boost {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-weight: bold;
     font-size: 26px;
-    color: white;
-    background-color: var(--dark-violet);
+    color: var(--light);
+    background-color: var(--primary);
     padding: 30px 0;
     background-image: url("../images/bg-boost-mobile.svg")
 }
 
 footer {
-    background-color: var(--very-dark-blue);
+    background-color: var(--dark);
     color: var(--gray);
     text-align: center;
     padding: 25px 0;
 }
 
 footer #logo {
-    color: white;
+    color: var(--light);
     font-size: 30px;
     font-weight: bold;
 }
@@ -276,12 +222,12 @@ footer .options {
 
 footer .title {
     font-weight: bold;
-    color: white;
+    color: var(--light);
     padding-top: 20px;
 }
 
 #social {
-    color: white;
+    color: var(--light);
     padding: 20px 0;
     display: flex;
     flex-direction: row;
@@ -309,9 +255,6 @@ footer .title {
         margin: 15px;
         align-items: center;
     }
-    #menu-desktop {
-        display: flex;
-    }
     header .part:first-child {
         flex: 1;
     }
@@ -321,51 +264,20 @@ footer .title {
     header .part:last-child {
         display: none;
     }
-    #menu-desktop #main {
-        flex: 2;
-        display: flex;
-        flex-direction: row;
-    }
-    header #menu-desktop #main span {
-        margin: 0 10px;
-    }
-    #menu-desktop #login {
-        display: flex;
-        flex-direction: row;
-    }
-    header #menu-desktop #login span {
-        margin: 0 10px;
-    }
-    #login .btn-rounded {
-        width: 100px;
-        border-radius: 20px;
-        font-size: 18px;
-        padding: 0;
-    }
     #slogan {
         flex-direction: row-reverse;
-    }
-    #slogan {
         margin: 15px;
     }
     #slogan .part {
         width: 50%;
     }
-    #slogan div:first-child {
+    .text-bigger {
         font-weight: bold;
         font-size: 50px;
-        color: var(--very-dark-violet);
+        color: var(--dark);
     }
-    #text div {
-        text-align: left;
-        font-size: 26px;
-        ;
-    }
-    #slogan img {
+    #img-working {
         width: 500px;
-    }
-    #action button {
-        margin: 0 10px;
     }
     .link {
         flex-direction: row;

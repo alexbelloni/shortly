@@ -28,12 +28,12 @@ window.addEventListener("load", () => {
 
     document.querySelector("#hamburger").addEventListener("click", e => {
         const mobileClasses = document.querySelector("#menu-mobile").getAttribute("class");
-        document.querySelector("#menu-mobile").setAttribute("class", mobileClasses === "part close" ? "part open" : "part close");
-        const imageClasses = document.querySelector("#working").getAttribute("class");
-        document.querySelector("#working").setAttribute("class", imageClasses === "part close" ? "part" : "part close");
+        document.querySelector("#menu-mobile").setAttribute("class", mobileClasses === "part element-close" ? "part menu-mobile-open" : "part element-close");
+        const imageClasses = document.querySelector("#img-working").getAttribute("class");
+        document.querySelector("#img-working").setAttribute("class", imageClasses === "part element-close" ? "part" : "part element-close");
     });
 
-    document.querySelector("#btn-shorten-it").addEventListener("click", e => {
+    function createLinkPanel(userLink, shortlyLink) {
         function createElement(atype, aclass, atext) {
             const element = document.createElement(atype);
             element.className = aclass || "";
@@ -43,40 +43,49 @@ window.addEventListener("load", () => {
         function getTrunkedLink(link) {
             return `${link.substr(0, 30)}...`;
         }
-        function createLinkPanel(shortlyLink) {
-            const nodeLink = createElement("div", "link");
-            nodeLink.appendChild(createElement("span", null, getTrunkedLink(userLink)));
-            nodeLink.appendChild(createElement("span", null, shortlyLink));
-            const nodeButton = createElement("button", null, "Copy");
-            nodeButton.addEventListener("click", () => {
-                ClipboardAPIClipboardWrite(shortlyLink);
-                nodeButton.innerText = "Copied!"
-                nodeButton.className = "copied";
-            });
-            nodeLink.appendChild(nodeButton);
-            document.querySelector("#links").appendChild(nodeLink);
-        }
 
+        const nodeLink = createElement("div", "link");
+        nodeLink.appendChild(createElement("span", null, getTrunkedLink(userLink)));
+        nodeLink.appendChild(createElement("span", null, shortlyLink));
+        const nodeButton = createElement("div", "button btn-small", "Copy");
+        nodeButton.addEventListener("click", () => {
+            ClipboardAPIClipboardWrite(shortlyLink);
+            nodeButton.innerText = "Copied!"
+            nodeButton.className = "button btn-small copied";
+            setTimeout(()=>{
+                nodeButton.className = "button btn-small";
+                nodeButton.innerText = "Copy"
+            }, 2000);
+        });
+        nodeLink.appendChild(nodeButton);
+        document.querySelector("#links").appendChild(nodeLink);
+    }
+
+    document.querySelector("#btn-shorten-it").addEventListener("click", e => {
         const userLink = document.querySelector("#user-link").value;
         shortify(userLink, success => {
-            createLinkPanel(success);
-        }, error => alert(error));
+            createLinkPanel(userLink, success);
+        }, error =>{            
+            alert(error);
+            document.querySelector("#user-link").focus();
+            document.querySelector("#btn-shorten-it").blur();
+        }) 
     });
 })
 
 function setLoginStatus(isWaiting, isLogged, user) {
     if (isLogged) {
-        document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area close"));
-        document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading close"));
+        document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area element-close"));
+        document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading element-close"));
         document.querySelectorAll(".user").forEach(e => e.setAttribute("class", "user"));
         document.querySelectorAll(".username").forEach(e => e.innerText = user.name);
     } else {
-        document.querySelectorAll(".user").forEach(e => e.setAttribute("class", "user close"));
+        document.querySelectorAll(".user").forEach(e => e.setAttribute("class", "user element-close"));
         if (!isWaiting) {
             document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area"));
-            document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading close"));
+            document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading element-close"));
         } else {
-            document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area close"));
+            document.querySelectorAll(".login-area").forEach(e => e.setAttribute("class", "login-area element-close"));
             document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading"));
         }
     }
@@ -95,7 +104,7 @@ function ClipboardAPIClipboardWrite(value) {
 }
 
 function shortify(userLink, success, error) {
-    if (!userLink) return
+    if (!userLink) return error("Link is required");
 
     const shortenerModule = (Math.random() < 0.5) ? "ToolBitly" : "ToolRebrandly";
 
@@ -103,7 +112,8 @@ function shortify(userLink, success, error) {
         const APISender = module.default();
         import(`./${shortenerModule}.js`).then(module => {
             const shortener = module.default;            
-            APISender.post(configObj.shorteners, shortener, userLink, e => {
+            APISender.post(configObj.shorteners, shortener, userLink.indexOf('http')>-1 ? userLink : `https://${userLink}`, e => {
+                console.log(e)
                 if (e.error) {
                     error(e.error);
                 } else {

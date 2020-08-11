@@ -1,0 +1,64 @@
+.button {
+    background-color: var(--secondary);
+    color: var(--light);
+    padding: 20px;
+    width: 200px;
+    border-radius: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: transition all 0.2s ease-in-out;
+}
+
+.btn-small {
+    padding: 0;
+}
+
+.btn-normal:hover {
+    background: rgba(0, 0, 0, 0);
+    color: var(--primary);
+    box-shadow: inset 0 0 0 3px var(--primary);
+}
+
+.btn-no-ghost:hover {
+    color: var(--light);
+    box-shadow: inset 0 0 0 3px var(--light);
+}
+
+.btn-signup {
+    width: 100px;
+    border-radius: 20px;
+    font-size: 18px;
+    padding: 0;
+}
+
+#slogan .button {
+    margin: 20px 0;
+}
+
+#action .button {
+    flex: 1;
+}
+
+.btn-squared {
+    border-radius: 7px;
+    font-size: 20px;
+}
+
+.link .button {
+    flex: 1;
+    border-radius: 7px;
+}
+
+.copied {
+    background-color: var(--primary);
+    color: var(--light);
+    box-shadow: inset 0 0 0 3px var(--light);
+    transition: color 1s ease-in-out;
+}
+
+@media screen and (min-width: 1278px) {
+    #action .button {
+        margin: 0 10px;
+    }
+}

@@ -7,11 +7,14 @@
   <!-- displays site properly based on user's device -->
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel="stylesheet" href="./styles/main.css">
+  <link rel="stylesheet" href="./styles/buttons.css">
+  <link rel="stylesheet" href="./styles/menu.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins:500,700&display=swap" rel="stylesheet">
   <title>Shortly</title>
 </head>
 
 <body>
+
   <header>
     <div class="part">
       <img id="logo" src="./images/logo.svg"></img>
@@ -22,26 +25,23 @@
         <span>Pricing</span>
         <span>Resources</span>
       </div>
-      
+
       <div id="login" class="login-area">
         <span>Login</span>
-        <button class="btn-rounded btn-signup">
+        <div class="button btn-normal btn-signup">
           Sign up
-        </button>        
-      </div>  
-      <div class="loading close"><img src="../images/loading.gif" /></div> 
-      <div class="user close"><img class="avatar" src="../images/avatar.png" /><span class="username"></span></div>    
-    </nav>    
+        </div>
+      </div>
+      <div class="loading element-close"><img src="../images/loading.gif" /></div>
+      <div class="user element-close"><img class="avatar" src="../images/avatar.png" /><span class="username"></span>
+      </div>
+    </nav>
     <div class="part">
       <img id="hamburger" src="./images/hamburger.png"></img>
-    </div>    
-  </header>
-  
-  <section id="slogan">
-    <div class="part">
-      <img id="working" src="./images/illustration-working.svg"></img>
     </div>
-    <div id="menu-mobile" class="part close">
+  </header>
+  <section>
+    <div id="menu-mobile" class="part element-close">
       <span>Features</span>
       <span>Pricing</span>
       <span>Resources</span>
@@ -49,33 +49,39 @@
       <div class="login-area">
         <span>Login</span>
         <div>
-          <button class="btn-rounded btn-signup">
+          <div class="button btn-normal btn-signup">
             Sign up
-          </button>
-        </div>        
+          </div>
+        </div>
       </div>
-      <div class="loading close"><img src="../images/loading.gif" /></div> 
-      <div class="user close"><img class="avatar" src="../images/avatar.png" /><span class="username"></span></div>
-    </div>
-    <div id="text" class="part">
-      <div>
-        <p>More than just</p>
-        <p>shorter links</p>
-      </div>
-      <div>
-        <p>Build your brands recognition and get detailed insights on how links are performing.</p>
-      </div>
-      <div>
-        <button id="btn-get-started" class="btn-rounded">
-          Get Started
-        </button>
+      <div class="loading element-close"><img src="../images/loading.gif" /></div>
+      <div class="user element-close"><img class="avatar" src="../images/avatar.png" /><span class="username"></span>
       </div>
     </div>
   </section>
+  <section id="slogan">
+    <div class="image part">
+      <img id="img-working" src="./images/illustration-working.svg"></img>
+    </div>
+
+    <div class="text part">
+      <div class="text-bigger">
+        <div>More than just</div>
+        <div>shorter links</div>
+      </div>
+      <div>Build your brands recognition and get detailed insights on how links are performing.</div>
+      <div>
+        <div class="button btn-normal">
+          Get Started
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="actiontop">
     <section id="action">
       <input id="user-link" type="text" placeholder="Shorten a link here..."></input>
-      <button id="btn-shorten-it" class="btn-regular">Shorten It!</button>
+      <div id="btn-shorten-it" class="button btn-squared btn-no-ghost">Shorten It!</div>
     </section>
     <section id="links">
     </section>
@@ -114,7 +120,7 @@
         <div class="circle">
           <img src="./images/icon-fully-customizable.svg" />
         </div>
-        <p class="title">Fully Customizable</p>
+        <p class="title">Customizable</p>
         <p class="text">Improve brand awareness and content discoverability through customizable
           links, supercharging audience engagement.
         </p>
@@ -124,10 +130,8 @@
 
   <section id="boost">
     <p>Boost your links today</p>
-    <div>
-      <button class="btn-rounded">
-        Get Started
-      </button>
+    <div class="button">
+      Get Started
     </div>
   </section>
 
@@ -166,11 +170,12 @@
   </footer>
 
   <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G" target="_blank">Frontend Mentor</a>.
+    Challenge by <a href="https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G"
+      target="_blank">Frontend Mentor</a>.
     Coded by <a href="https://alexandrebelloni.com">Alex</a>.
   </div>
 
-  <script  type="text/javascript" src="./js/app.js"></script>
+  <script type="text/javascript" src="./js/app.js"></script>
   <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>

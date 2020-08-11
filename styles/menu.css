@@ -1,0 +1,58 @@
+#hamburger {
+    width: 50px;
+}
+
+#menu-desktop {
+    display: none;
+}
+
+#menu-mobile {
+    padding: 0 0 15px 0;
+}
+
+.menu-mobile-open {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary);
+    color: var(--light);
+    border-radius: 7px;
+    align-items: center;
+}
+
+#menu-mobile span {
+    margin: 10px;
+}
+
+.login-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (min-width: 1278px) {
+    .menu-mobile-open {
+        display: none;
+    }
+    #menu-desktop {
+        display: flex;
+    }
+    #menu-desktop #main {
+        flex: 2;
+        display: flex;
+        flex-direction: row;
+    }
+    #menu-desktop #main span {
+        margin: 0 10px;
+    }
+    #menu-desktop #login {
+        display: flex;
+        flex-direction: row;
+    }
+    #menu-desktop #login span {
+        margin: 0 10px;
+    }
+    .login-area {
+        display: flex;
+        flex-direction: row;
+    }
+}
