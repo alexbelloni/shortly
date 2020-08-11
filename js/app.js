@@ -106,14 +106,13 @@ function ClipboardAPIClipboardWrite(value) {
 function shortify(userLink, success, error) {
     if (!userLink) return error("Link is required");
 
-    const shortenerModule = (Math.random() < 0.5) ? "ToolBitly" : "ToolRebrandly";
+    const shortenerModule = "ToolBitly" //(Math.random() < 0.5) ? "ToolBitly" : "ToolRebrandly";
 
     import("./APISender.js").then(module => {
         const APISender = module.default();
         import(`./${shortenerModule}.js`).then(module => {
             const shortener = module.default;            
             APISender.post(configObj.shorteners, shortener, userLink.indexOf('http')>-1 ? userLink : `https://${userLink}`, e => {
-                console.log(e)
                 if (e.error) {
                     error(e.error);
                 } else {
