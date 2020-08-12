@@ -43,6 +43,8 @@
     }
     #menu-desktop #main span {
         margin: 0 10px;
+        cursor: pointer;
+        color: var(--dark);
     }
     #menu-desktop #login {
         display: flex;
@@ -50,6 +52,7 @@
     }
     #menu-desktop #login span {
         margin: 0 10px;
+        cursor: pointer;
     }
     .login-area {
         display: flex;

@@ -5,10 +5,6 @@
     --dark: hsl(260, 8%, 14%);
     --gray: rgba(240, 240, 240, 0.938);
     --red: hsl(0, 87%, 67%);
-    /*
-    
-    --grayish-violet: hsl(240, 20%, 99%);
-    */
 }
 
 body {
@@ -84,7 +80,7 @@ header .part:last-child {
     font-weight: bold;
 }
 
-#action-area{
+#action-area {
     margin: 15px;
     padding: 20px;
     background-color: var(--primary);
@@ -97,7 +93,6 @@ header .part:last-child {
     flex-direction: row;
     flex-wrap: wrap;
     text-align: center;
-
 }
 
 #action input {
@@ -107,16 +102,16 @@ header .part:last-child {
     flex: 3;
 }
 
-#user-link.error{
-    border-width: 3px; 
-    border-color: var(--red); 
+#user-link.error {
+    border-width: 3px;
+    border-color: var(--red);
 }
 
-#message-error{
-    color:var(--red);
-    font-size:small;
+#message-error {
+    color: var(--red);
+    font-size: small;
     font-style: italic;
-    margin-top:15px;
+    margin-top: 15px;
 }
 
 #links {
@@ -243,6 +238,25 @@ footer .title {
     padding-top: 20px;
 }
 
+.footer-submenu {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+}
+
+.footer-submenu>span {
+    margin: 3px 0;
+}
+
+.shortly-link {
+    cursor: pointer;
+}
+
+.shortly-link:hover {
+    color: var(--secondary);
+}
+
 #social {
     color: var(--light);
     padding: 20px 0;
@@ -252,10 +266,12 @@ footer .title {
 }
 
 #social img {
+    cursor:pointer;
     padding: 0 10px;
 }
 
 .attribution {
+    margin: 10px;
     font-size: 11px;
     text-align: center;
 }
