@@ -10,9 +10,7 @@
     vertical-align: transition all 0.2s ease-in-out;
 }
 
-.btn-small {
-    padding: 0;
-}
+
 
 .btn-normal:hover {
     background: rgba(0, 0, 0, 0);
@@ -50,10 +48,14 @@
     border-radius: 7px;
 }
 
-.copied {
+.btn-copy {
+    padding: 0;
+    margin: 0 7px;
+}
+
+.btn-copied {
     background-color: var(--primary);
     color: var(--light);
-    box-shadow: inset 0 0 0 3px var(--light);
     transition: color 1s ease-in-out;
 }
 

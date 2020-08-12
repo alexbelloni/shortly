@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
         const FirebaseAuth = module.default;
         FirebaseAuth.getConfigFirebase(config => {
             configObj = config;
-            
+
             // Initialize Firebase
             firebase.initializeApp(config.firebase);
 
@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
             FirebaseAuth.getRedirectResult(function (result) {
                 setLoginStatus(false);
                 if (result.credential) {
-                    setLoginStatus(false, true, {name: result.user.displayName});
+                    setLoginStatus(false, true, { name: result.user.displayName });
                 }
             });
 
@@ -47,13 +47,13 @@ window.addEventListener("load", () => {
         const nodeLink = createElement("div", "link");
         nodeLink.appendChild(createElement("span", null, getTrunkedLink(userLink)));
         nodeLink.appendChild(createElement("span", null, shortlyLink));
-        const nodeButton = createElement("div", "button btn-small", "Copy");
+        const nodeButton = createElement("div", "button btn-copy", "Copy");
         nodeButton.addEventListener("click", () => {
             ClipboardAPIClipboardWrite(shortlyLink);
             nodeButton.innerText = "Copied!"
-            nodeButton.className = "button btn-small copied";
-            setTimeout(()=>{
-                nodeButton.className = "button btn-small";
+            nodeButton.className = "button btn-copy btn-copied";
+            setTimeout(() => {
+                nodeButton.className = "button btn-copy";
                 nodeButton.innerText = "Copy"
             }, 2000);
         });
@@ -62,15 +62,22 @@ window.addEventListener("load", () => {
     }
 
     document.querySelector("#btn-shorten-it").addEventListener("click", e => {
-        const userLink = document.querySelector("#user-link").value;
+        const errorMessageElement = document.querySelector("#message-error");
+        const userLinkElement = document.querySelector("#user-link");
+        const userLink = userLinkElement.value;
         shortify(userLink, success => {
+            userLinkElement.classList.remove("error");
+            errorMessageElement.style.display = "none";
             createLinkPanel(userLink, success);
-        }, error =>{            
-            alert(error);
-            document.querySelector("#user-link").focus();
+        }, error => {
+            userLinkElement.classList.add("error");
+            errorMessageElement.style.display = "block";
+            errorMessageElement.innerText = error;
             document.querySelector("#btn-shorten-it").blur();
-        }) 
+        })
     });
+
+    
 })
 
 function setLoginStatus(isWaiting, isLogged, user) {
@@ -104,15 +111,15 @@ function ClipboardAPIClipboardWrite(value) {
 }
 
 function shortify(userLink, success, error) {
-    if (!userLink) return error("Link is required");
+    if (!userLink) return error("Please add a link");
 
     const shortenerModule = "ToolBitly" //(Math.random() < 0.5) ? "ToolBitly" : "ToolRebrandly";
 
     import("./APISender.js").then(module => {
         const APISender = module.default();
         import(`./${shortenerModule}.js`).then(module => {
-            const shortener = module.default;            
-            APISender.post(configObj.shorteners, shortener, userLink.indexOf('http')>-1 ? userLink : `https://${userLink}`, e => {
+            const shortener = module.default;
+            APISender.post(configObj.shorteners, shortener, userLink.indexOf('http') > -1 ? userLink : `https://${userLink}`, e => {
                 if (e.error) {
                     error(e.error);
                 } else {
