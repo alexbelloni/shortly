@@ -51,7 +51,7 @@ window.addEventListener("load", () => {
         nodeButton.addEventListener("click", () => {
             ClipboardAPIClipboardWrite(shortlyLink);
             nodeButton.innerText = "Copied!"
-            nodeButton.className = "button btn-copy btn-copied";
+            nodeButton.className = "button btn-copy btn-copied";            
             setTimeout(() => {
                 nodeButton.className = "button btn-copy";
                 nodeButton.innerText = "Copy"
@@ -68,6 +68,7 @@ window.addEventListener("load", () => {
         shortify(userLink, success => {
             userLinkElement.classList.remove("error");
             errorMessageElement.style.display = "none";
+            userLinkElement.value = "";
             createLinkPanel(userLink, success);
         }, error => {
             userLinkElement.classList.add("error");
