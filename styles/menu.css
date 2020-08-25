@@ -19,7 +19,11 @@
     align-items: center;
 }
 
-#menu-mobile span {
+#menu-mobile .btn-login {
+    margin: 10px;
+}
+
+#menu-mobile .btn-logout {
     margin: 10px;
 }
 
@@ -50,7 +54,11 @@
         display: flex;
         flex-direction: row;
     }
-    #menu-desktop #login span {
+    #menu-desktop #login .btn-login {
+        margin: 0 10px;
+        cursor: pointer;
+    }
+    #menu-desktop .btn-logout {
         margin: 0 10px;
         cursor: pointer;
     }

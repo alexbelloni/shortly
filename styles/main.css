@@ -266,7 +266,7 @@ footer .title {
 }
 
 #social img {
-    cursor:pointer;
+    cursor: pointer;
     padding: 0 10px;
 }
 
@@ -296,6 +296,9 @@ footer .title {
     }
     header .part:last-child {
         display: none;
+    }
+    .avatar {
+        background-color: transparent;
     }
     #slogan {
         flex-direction: row-reverse;

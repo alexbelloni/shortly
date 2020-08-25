@@ -23,6 +23,17 @@ window.addEventListener("load", () => {
             document.querySelectorAll(".btn-signup").forEach(e => e.addEventListener("click", () => {
                 FirebaseAuth.signIn();
             }));
+            document.querySelectorAll(".btn-login").forEach(e => e.addEventListener("click", () => {
+                FirebaseAuth.signIn();
+            }));
+            document.querySelectorAll(".btn-logout").forEach(e => e.addEventListener("click", () => {
+                FirebaseAuth.signOut(()=>{
+                    setLoginStatus(false);
+                    document.querySelector("#statistics").setAttribute("class", "");
+                    document.querySelector("#boost").setAttribute("class", "");
+                    document.querySelector("#links").innerHTML = "";
+                });
+            }));
         });
     });
 
@@ -33,33 +44,7 @@ window.addEventListener("load", () => {
         document.querySelector("#img-working").setAttribute("class", imageClasses === "part element-close" ? "part" : "part element-close");
     });
 
-    function createLinkPanel(userLink, shortlyLink) {
-        function createElement(atype, aclass, atext) {
-            const element = document.createElement(atype);
-            element.className = aclass || "";
-            element.innerText = atext || "";
-            return element;
-        }
-        function getTrunkedLink(link) {
-            return `${link.substr(0, 30)}...`;
-        }
 
-        const nodeLink = createElement("div", "link");
-        nodeLink.appendChild(createElement("span", null, getTrunkedLink(userLink)));
-        nodeLink.appendChild(createElement("span", null, shortlyLink));
-        const nodeButton = createElement("div", "button btn-copy", "Copy");
-        nodeButton.addEventListener("click", () => {
-            ClipboardAPIClipboardWrite(shortlyLink);
-            nodeButton.innerText = "Copied!"
-            nodeButton.className = "button btn-copy btn-copied";            
-            setTimeout(() => {
-                nodeButton.className = "button btn-copy";
-                nodeButton.innerText = "Copy"
-            }, 2000);
-        });
-        nodeLink.appendChild(nodeButton);
-        document.querySelector("#links").appendChild(nodeLink);
-    }
 
     document.querySelector("#btn-shorten-it").addEventListener("click", e => {
         const errorMessageElement = document.querySelector("#message-error");
@@ -78,8 +63,36 @@ window.addEventListener("load", () => {
         })
     });
 
-    
+
 })
+
+function createLinkPanel(userLink, shortlyLink) {
+    function createElement(atype, aclass, atext) {
+        const element = document.createElement(atype);
+        element.className = aclass || "";
+        element.innerText = atext || "";
+        return element;
+    }
+    function getTrunkedLink(link) {
+        return `${link.substr(0, 30)}...`;
+    }
+
+    const nodeLink = createElement("div", "link");
+    nodeLink.appendChild(createElement("span", null, getTrunkedLink(userLink)));
+    nodeLink.appendChild(createElement("span", null, shortlyLink));
+    const nodeButton = createElement("div", "button btn-copy", "Copy");
+    nodeButton.addEventListener("click", () => {
+        ClipboardAPIClipboardWrite(shortlyLink);
+        nodeButton.innerText = "Copied!"
+        nodeButton.className = "button btn-copy btn-copied";
+        setTimeout(() => {
+            nodeButton.className = "button btn-copy";
+            nodeButton.innerText = "Copy"
+        }, 2000);
+    });
+    nodeLink.appendChild(nodeButton);
+    document.querySelector("#links").appendChild(nodeLink);
+}
 
 function setLoginStatus(isWaiting, isLogged, user) {
     if (isLogged) {
@@ -87,6 +100,13 @@ function setLoginStatus(isWaiting, isLogged, user) {
         document.querySelectorAll(".loading").forEach(e => e.setAttribute("class", "loading element-close"));
         document.querySelectorAll(".user").forEach(e => e.setAttribute("class", "user"));
         document.querySelectorAll(".username").forEach(e => e.innerText = user.name);
+
+        document.querySelector("#statistics").setAttribute("class", "element-close");
+        document.querySelector("#boost").setAttribute("class", "element-close");
+
+        createLinkPanel("http://lorem.ipsum/dolor/sit_amet_consectetur", "https://shrt/U8qIGkBv");
+        createLinkPanel("http://loremdolor/sit_amet_consectetur", "https://shrt/ITGkChtq");
+
     } else {
         document.querySelectorAll(".user").forEach(e => e.setAttribute("class", "user element-close"));
         if (!isWaiting) {

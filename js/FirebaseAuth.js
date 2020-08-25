@@ -43,12 +43,14 @@ const FirebaseAuth = () => {
         firebase.auth().signInWithRedirect(provider);
     }
 
-    function signOut() {
-        // firebase.auth().signOut().then(function () {
-        //   // Sign-out successful.
-        // }).catch(function (error) {
-        //   // An error happened.
-        // });
+    function signOut(callback) {
+        firebase.auth().signOut().then(function () {
+          // Sign-out successful.
+          callback()
+        }).catch(function (error) {
+          // An error happened.
+          console.log('signOut',error)
+        });
     }
 
     function getRedirectResult(callback) {
